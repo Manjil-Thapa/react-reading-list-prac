@@ -4,12 +4,12 @@ import BookEdit from './BookEdit';
 function BookShow({ book, onDelete, onEdit }) {
   const [showEdit, setShowEdit] = useState(false);
 
-  const handleEdit = () => {
-    setShowEdit(!showEdit);
+  const handleDeleteClick = () => {
+    onDelete(book.id);
   };
 
-  const handleDelete = () => {
-    onDelete(book.id);
+  const handleEditClick = () => {
+    setShowEdit(!showEdit);
   };
 
   const handleSubmit = (id, newTitle) => {
@@ -19,16 +19,20 @@ function BookShow({ book, onDelete, onEdit }) {
 
   let content = <h3>{book.title}</h3>;
   if (showEdit) {
-    content = <BookEdit book={book} onSubmit={handleSubmit} />;
+    content = <BookEdit onSubmit={handleSubmit} book={book} />;
   }
 
   return (
     <div className='book-show'>
-      <img alt='books' src={`https://picsum.photos/seed/${book.id}/150/100`} />
+      <img alt='books' src={`https://picsum.photos/seed/${book.id}/300/200`} />
       <div>{content}</div>
-      <div className='actions' onClick={handleEdit}>
-        <button className='edit'></button>
-        <button className='delete' onClick={handleDelete}></button>
+      <div className='actions'>
+        <button className='edit' onClick={handleEditClick}>
+          Edit
+        </button>
+        <button className='delete' onClick={handleDeleteClick}>
+          Delete
+        </button>
       </div>
     </div>
   );
